@@ -2,7 +2,7 @@ package dev.xarlsr.popdb.fields;
 
 import dev.xarlsr.popdb.generators.ValuesGenerator;
 
-public class NameField implements Field{
+public class StringField implements Field{
 
     private static final int RVC = 100;
     private static final boolean FILE_NEEDED = true;

@@ -9,11 +9,6 @@ import java.io.IOException;
  */
 public class ValuesGenerator {
 
-    /**
-     * RVC states Read Value Count, which is the number of lines read from a text file
-     * for file extracting methods, like 'getStringFromFile()'.
-     */
-
     public ValuesGenerator(){    }
 
  /**
@@ -24,11 +19,9 @@ public class ValuesGenerator {
   * this number of lines or more.
   * @param fileName: Ruta y nombre del fichero que contiene los nombres.
   * @param readValueCount: Number of lines to be read from the text file.
-*
   * @return Devuelve un <tt>String</tt> con el nombre seleccionado.
   */
     public static String getStringFromFile(String fileName, int readValueCount){
-
         String[] arrStr = new String[readValueCount];
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));

@@ -1,10 +1,9 @@
 package dev.xarlsr.popdb;
 
 import dev.xarlsr.popdb.fields.Field;
-import dev.xarlsr.popdb.fields.FieldComposer;
-import dev.xarlsr.popdb.fields.FieldFactory;
 import dev.xarlsr.popdb.rows.Row;
 import dev.xarlsr.popdb.userint.GetData;
+import dev.xarlsr.utilidades.EntradaTeclado;
 
 import java.util.List;
 
@@ -19,19 +18,14 @@ public class App {
 
         tableName=GetData.setTableName();
         fieldsCount=GetData.setFieldsCount();
+        System.out.println("Cuantas entradas? ");
+        int cuenta = EntradaTeclado.leeEntero(3);
         Row row = new Row();
-        FieldFactory ff = new FieldFactory();
-        for (int i = 1; i<=GetData.getFieldsCount();i++) {
-            String fType = GetData.getFieldType();
-            Field field = ff.getField(fType);
-            field.setType(fType);
-            field.setName(GetData.getFieldName());
-            field.setPathName(GetData.getPathName());
-            row.addField(field);
-        }
-        for (int i = 0; i<fieldsCount;i++) {
-            Field field = row.getField(i);
-            System.out.println(field.getName()+" - "+field.getValue());
+        row.fieldListComposer(fieldsCount);
+        for(int i = 1; i<=cuenta;i++){
+
+
+            row.composeSql();
         }
 
     }

@@ -1,9 +1,7 @@
 package dev.xarlsr.popdb.fields;
 
-import static dev.xarlsr.popdb.fields.FTypes.APELLIDOS;
-
 /**
- * Factory class to generate the different fields to be filled based on TableField interface.
+ * Factory class to generate the different fields to be filled based on Field interface.
  */
 public class FieldFactory {
 
@@ -14,7 +12,7 @@ public class FieldFactory {
         }
         switch (fieldType){
             case "APELLIDOS" -> {return new ApellidosField();}
-            case "NAME" -> {return new NameField();}
+            case "STRING" -> {return new StringField();}
             default -> {return null;}
         }
     }

@@ -2,6 +2,10 @@ package dev.xarlsr.popdb.fields;
 
 import dev.xarlsr.popdb.generators.ValuesGenerator;
 
+/**
+ * This class of field is intended for using with spanish and other latin countries
+ * with double surname or family name.
+ */
 public class ApellidosField implements Field{
 
     private static final int RVC = 100;
@@ -67,8 +71,8 @@ public class ApellidosField implements Field{
     }
 
     /**
-     * Generates and returns the value of the field. The value generation will be different
-     * for each type of field.
+     * Generates and returns a double surname, used in Spain and other latin
+     * countries.
      * @return Value of the field
      */
     @Override

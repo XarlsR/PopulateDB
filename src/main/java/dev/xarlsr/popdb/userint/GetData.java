@@ -33,7 +33,8 @@ public class GetData {
     }
 
     public static String getFieldType(){
-        System.out.print("Tipo del campo: ");
+        System.out.println("Tipo del campo (puede introducirse en MAY/min indistintamente: ");
+        System.out.println("NAME, APELLIDOS");
         return EntradaTeclado.leeCadena().toUpperCase();
     }
 
