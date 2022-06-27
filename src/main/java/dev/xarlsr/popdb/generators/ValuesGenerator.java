@@ -9,20 +9,27 @@ import java.io.IOException;
  */
 public class ValuesGenerator {
 
+    /**
+     * RVC states Read Value Count, which is the number of lines read from a text file
+     * for file extracting methods, like 'getStringFromFile()'.
+     */
+
     public ValuesGenerator(){    }
 
  /**
   * Returns a string randomly extracted from the selected text file.
-  * It reads all the text lines from the file, loads them into an array
-  * and extracts a random string from the array. The length of array is set to 100,
-  * so the text file must contain 100 text lines or more.
+  * It reads the number of text lines set by the value of readValueCount param from the file,
+  * loads them into an array and extracts a random string from the array.
+  * The length of array is set to readValueCount value, so the text file must contain
+  * this number of lines or more.
   * @param fileName: Ruta y nombre del fichero que contiene los nombres.
+  * @param readValueCount: Number of lines to be read from the text file.
+*
   * @return Devuelve un <tt>String</tt> con el nombre seleccionado.
   */
-    // TODO: En una futura versión añadir un parámetro para indicar cuántos valores deben ser leídos antes de realizar la selección aleatoria. En la v1.0 está fijado a 100.
-    public static String getStringFromFile(String fileName){
+    public static String getStringFromFile(String fileName, int readValueCount){
 
-        String[] arrStr = new String[100];
+        String[] arrStr = new String[readValueCount];
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             int i = 0;
@@ -30,11 +37,11 @@ public class ValuesGenerator {
                arrStr[i] = br.readLine();
                i++;
             }
-            while ((arrStr[i-1] != null) & (i<100));
+            while ((arrStr[i-1] != null) & (i<readValueCount));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int i = (int)(Math.random()*100);
+        int i = (int)(Math.random()*readValueCount);
         return arrStr[i];
     }
 

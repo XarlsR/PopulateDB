@@ -1,34 +1,38 @@
 package dev.xarlsr.popdb;
 
-import dev.xarlsr.popdb.sqlcoders.FieldsFiller;
-import dev.xarlsr.popdb.sqlcoders.TableField;
-import dev.xarlsr.popdb.sqlcoders.TableRow;
-import dev.xarlsr.popdb.userint.EnterData;
-import dev.xarlsr.popdb.userint.FieldDescriptor;
+import dev.xarlsr.popdb.fields.Field;
+import dev.xarlsr.popdb.fields.FieldComposer;
+import dev.xarlsr.popdb.fields.FieldFactory;
+import dev.xarlsr.popdb.rows.Row;
+import dev.xarlsr.popdb.userint.GetData;
 
 import java.util.List;
 
 public class App {
 
+    public static String tableName;
+    public static int fieldsCount;
+    public List<Field> fields;
 
     public static void main( String[] args ) {
 
-        List<FieldDescriptor> fide = EnterData.genRowFieldsList();
-        for (int i = 0; i<fide.size(); i++){
-            FieldDescriptor fd = fide.get(i);
-            System.out.println(fd.fdName+" - "+fd.fdType+" - "+fd.fdPath);
+
+        tableName=GetData.setTableName();
+        fieldsCount=GetData.setFieldsCount();
+        Row row = new Row();
+        FieldFactory ff = new FieldFactory();
+        for (int i = 1; i<=GetData.getFieldsCount();i++) {
+            String fType = GetData.getFieldType();
+            Field field = ff.getField(fType);
+            field.setType(fType);
+            field.setName(GetData.getFieldName());
+            field.setPathName(GetData.getPathName());
+            row.addField(field);
+        }
+        for (int i = 0; i<fieldsCount;i++) {
+            Field field = row.getField(i);
+            System.out.println(field.getName()+" - "+field.getValue());
         }
 
-        List<TableField> tafi = FieldsFiller.filledField(fide);
-        for (int i = 0; i<tafi.size(); i++){
-            TableField tf = tafi.get(i);
-            System.out.println(tf.getName()+" - "+tf.getType()+" - "+tf.getValue());
-        }
-        TableRow tr = new TableRow();
-        String codeLine = tr.makeCode(tafi);
-        System.out.println(codeLine);
-
-
-        //System.out.println(MySqlCoder.rowText());
     }
 }
