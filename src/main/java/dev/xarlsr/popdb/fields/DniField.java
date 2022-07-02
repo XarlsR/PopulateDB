@@ -4,14 +4,12 @@ import dev.xarlsr.popdb.generators.ValuesGenerator;
 import dev.xarlsr.popdb.userint.GetData;
 
 /**
- * This class of field is intended for using with spanish and other latin countries
- * with double surname or family name.
+ * This class is intended to support the spanish DNI identification document.
  */
-public class ApellidosField implements Field{
+public class DniField implements Field{
 
-    private static final String FTYPE = "APELLIDOS";
-    private static final Boolean FILE_NEEDED = true;
-    private static final int RVC = 100;
+    private static final String FTYPE = "DNI";
+    private static final Boolean FILE_NEEDED = false;
     String fName;
     String pathName;
 
@@ -21,7 +19,7 @@ public class ApellidosField implements Field{
      */
     @Override
     public void setName(String fName) {
-        this.fName = fName;
+       this.fName = fName;
     }
 
     /**
@@ -37,7 +35,6 @@ public class ApellidosField implements Field{
     @Override
     public void setGenerateParameters() {
         setName(GetData.readFieldName());
-        setPathName(GetData.readPathName());
     }
 
     /**
@@ -68,19 +65,13 @@ public class ApellidosField implements Field{
     }
 
     /**
-     * Generates and returns a double surname, used in Spain and other latin
-     * countries.
+     * Generates and returns the value of the field. The generator method genDni()
+     * will be called for this field.
      * @return Value of the field
      */
     @Override
     public String getValue() {
-        String ape1;
-        String ape2;
-        String apellidos;
-        ape1 = ValuesGenerator.getStringFromFile(pathName, RVC);
-        ape2 = ValuesGenerator.getStringFromFile(pathName, RVC);
-        apellidos = ape1+" "+ape2;
-        return apellidos;
+        return ValuesGenerator.genDni();
     }
 
     /**

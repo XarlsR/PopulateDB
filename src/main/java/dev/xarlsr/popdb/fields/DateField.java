@@ -1,19 +1,18 @@
 package dev.xarlsr.popdb.fields;
 
-import dev.xarlsr.popdb.generators.ValuesGenerator;
 import dev.xarlsr.popdb.userint.GetData;
+import dev.xarlsr.utilidades.DateUtils;
 
-/**
- * This class of field is intended for using with spanish and other latin countries
- * with double surname or family name.
- */
-public class ApellidosField implements Field{
+import java.time.LocalDate;
 
-    private static final String FTYPE = "APELLIDOS";
-    private static final Boolean FILE_NEEDED = true;
-    private static final int RVC = 100;
+public class DateField implements Field{
+
+    private static final String FTYPE = "DATE";
+    private static final Boolean FILE_NEEDED = false;
     String fName;
     String pathName;
+    String firstDate;
+    String lastDate;
 
     /**
      * Sets the name of the field.
@@ -34,11 +33,33 @@ public class ApellidosField implements Field{
         this.pathName = pathName;
     }
 
+    /**
+     * Gets from the user the parameters needed to generate the value of the field.
+     * It also gets the name of the field.
+     */
     @Override
     public void setGenerateParameters() {
         setName(GetData.readFieldName());
-        setPathName(GetData.readPathName());
+        setFirstDate(GetData.readDate());
+        setLastDate(GetData.readDate());
     }
+
+    /**
+     * Sets the last date of the range of dates.
+     * @param date String with the last date of the period. Format "yyyyMMdd".
+     */
+    private void setLastDate(String date) {
+        lastDate = date;
+    }
+
+    /**
+     * Sets the first date of the range of dates.
+     * @param date String with the first date of the period. Format "yyyyMMdd".
+     */
+    private void setFirstDate(String date) {
+        firstDate = date;
+    }
+
 
     /**
      * Returns the name of the field
@@ -68,27 +89,27 @@ public class ApellidosField implements Field{
     }
 
     /**
-     * Generates and returns a double surname, used in Spain and other latin
-     * countries.
+     * Generates and returns the value of the field. The value generation will be different
+     * for each type of field.
+     *
      * @return Value of the field
      */
     @Override
     public String getValue() {
-        String ape1;
-        String ape2;
-        String apellidos;
-        ape1 = ValuesGenerator.getStringFromFile(pathName, RVC);
-        ape2 = ValuesGenerator.getStringFromFile(pathName, RVC);
-        apellidos = ape1+" "+ape2;
-        return apellidos;
+
+        LocalDate ldF = DateUtils.stringToDate(firstDate, "yyyyMMdd", "yyyyMMdd");
+        LocalDate ldL = DateUtils.stringToDate(lastDate, "yyyyMMdd", "yyyyMMdd");
+
+        return null;
     }
 
     /**
      * Returns whether or not the field needs a text file to be generated.
+     *
      * @return True or false
      */
     @Override
     public Boolean needsFile() {
-        return FILE_NEEDED;
+        return null;
     }
 }

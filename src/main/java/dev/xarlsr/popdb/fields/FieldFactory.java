@@ -13,6 +13,7 @@ public class FieldFactory {
         switch (fieldType){
             case "APELLIDOS" -> {return new ApellidosField();}
             case "STRING" -> {return new StringField();}
+            case "DNI" -> {return new DniField();}
             default -> {return null;}
         }
     }

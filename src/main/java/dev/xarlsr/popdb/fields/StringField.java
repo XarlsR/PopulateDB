@@ -1,13 +1,14 @@
 package dev.xarlsr.popdb.fields;
 
 import dev.xarlsr.popdb.generators.ValuesGenerator;
+import dev.xarlsr.popdb.userint.GetData;
 
 public class StringField implements Field{
 
+    private static final String FTYPE = "STRING";
     private static final int RVC = 100;
     private static final boolean FILE_NEEDED = true;
     String fName;
-    String fType;
     String pathName;
 
 
@@ -21,15 +22,6 @@ public class StringField implements Field{
     }
 
     /**
-     * Sets the type of the field.
-     * @param fType String with the type of the field.
-     */
-    @Override
-    public void setType(String fType) {
-        this.fType = fType;
-    }
-
-    /**
      * Sets the name and path of the text file to extract the data from, to fill the field.
      * Only useful for fields generated from a text file.
      * @param pathName Sets the name and path of the source text file.
@@ -37,6 +29,12 @@ public class StringField implements Field{
     @Override
     public void setPathName(String pathName) {
         this.pathName = pathName;
+    }
+
+    @Override
+    public void setGenerateParameters() {
+        setName(GetData.readFieldName());
+        setPathName(GetData.readPathName());
     }
 
     /**
@@ -54,7 +52,7 @@ public class StringField implements Field{
      */
     @Override
     public String getType() {
-        return fType;
+        return FTYPE;
     }
 
     /**

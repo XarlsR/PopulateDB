@@ -11,11 +11,6 @@ public interface Field {
      */
     void setName(String fName);
 
-    /**
-     * Sets the type of the field.
-     * @param fType String with the type of the field.
-     */
-    void setType(String fType);
 
     /**
      * Sets the name and path of the text file to extract the data from, to fill the field.
@@ -23,6 +18,12 @@ public interface Field {
      * @param pathName Sets the name and path of the source text file.
      */
     void setPathName(String pathName);
+
+    /**
+     * Gets from the user the parameters needed to generate the value of the field.
+     * It also gets the name of the field.
+     */
+    void setGenerateParameters();
 
     /**
      * Returns the name of the field

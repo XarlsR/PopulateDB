@@ -1,0 +1,10 @@
+INSERT INTO personas (apellido,dni) VALUES('GARRIDO','71358025L');
+INSERT INTO personas (apellido,dni) VALUES('CARMONA','25551616L');
+INSERT INTO personas (apellido,dni) VALUES('ROMAN','52990234M');
+INSERT INTO personas (apellido,dni) VALUES('ORTIZ','05844496N');
+INSERT INTO personas (apellido,dni) VALUES('IGLESIAS','84888780N');
+INSERT INTO personas (apellido,dni) VALUES('AGUILAR','16693373L');
+INSERT INTO personas (apellido,dni) VALUES('VIDAL','32918984G');
+INSERT INTO personas (apellido,dni) VALUES('VELASCO','41957480Y');
+INSERT INTO personas (apellido,dni) VALUES('LORENZO','24950865M');
+INSERT INTO personas (apellido,dni) VALUES('ROMERO','29626039S');
