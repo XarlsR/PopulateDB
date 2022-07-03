@@ -5,13 +5,34 @@ import dev.xarlsr.utilidades.DateUtils;
 
 import java.time.LocalDate;
 
+/**
+ * Class for fields containing date values.
+ */
 public class DateField implements Field{
 
+    /**
+     * Sets the FTYPE constant (for field type).
+     */
     private static final String FTYPE = "DATE";
+
+    /**
+     * Sets the constant for a text file is needed or not.
+     */
     private static final Boolean FILE_NEEDED = false;
+
+    /**
+     * Name of the field
+     */
     String fName;
-    String pathName;
+
+    /**
+     * First (included) date of the interval.
+     */
     String firstDate;
+
+    /**
+     * Last (excluded) date of the interval.
+     */
     String lastDate;
 
     /**
@@ -24,14 +45,11 @@ public class DateField implements Field{
     }
 
     /**
-     * Sets the name and path of the text file to extract the data from, to fill the field.
-     * Only useful for fields generated from a text file.
+     * Useless for this field type
      * @param pathName Sets the name and path of the source text file.
      */
     @Override
-    public void setPathName(String pathName) {
-        this.pathName = pathName;
-    }
+    public void setPathName(String pathName) {}
 
     /**
      * Gets from the user the parameters needed to generate the value of the field.
@@ -60,7 +78,6 @@ public class DateField implements Field{
         firstDate = date;
     }
 
-
     /**
      * Returns the name of the field
      * @return Name of the field
@@ -80,12 +97,12 @@ public class DateField implements Field{
     }
 
     /**
-     * Returns the full path oft the source file
-     * @return Path of the text file. Null if not a FILE type field.
+     * Useless in this field type.
+     * @return Null
      */
     @Override
     public String getPathName() {
-        return pathName;
+        return null;
     }
 
     /**

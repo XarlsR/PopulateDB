@@ -3,12 +3,35 @@ package dev.xarlsr.popdb.fields;
 import dev.xarlsr.popdb.generators.ValuesGenerator;
 import dev.xarlsr.popdb.userint.GetData;
 
-public class StringField implements Field{
+/**
+ * Class for fields which value is a text String read from a file.
+ */
+public class FileStringField implements Field{
 
-    private static final String FTYPE = "STRING";
+    /**
+     * Sets file type constant.
+     */
+    private static final String FTYPE = "FSTRING";
+
+    /**
+     * Sets the number of lines to be read from text file. RVC stands for read value count.
+     * The number of lines of the file to be read must be equal or greater than RVC.
+     */
     private static final int RVC = 100;
+
+    /**
+     * Sets a text file is needed.
+     */
     private static final boolean FILE_NEEDED = true;
+
+    /**
+     * Name of the field.
+     */
     String fName;
+
+    /**
+     * Full path and name of the text file
+     */
     String pathName;
 
 
@@ -31,6 +54,9 @@ public class StringField implements Field{
         this.pathName = pathName;
     }
 
+    /**
+     * Sets the user parameters needed to generate the field.
+     */
     @Override
     public void setGenerateParameters() {
         setName(GetData.readFieldName());

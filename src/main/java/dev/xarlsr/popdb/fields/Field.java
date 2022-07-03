@@ -11,9 +11,8 @@ public interface Field {
      */
     void setName(String fName);
 
-
     /**
-     * Sets the name and path of the text file to extract the data from, to fill the field.
+     * Sets the name and path of the source text file to extract the data from.
      * Only useful for fields generated from a text file.
      * @param pathName Sets the name and path of the source text file.
      */

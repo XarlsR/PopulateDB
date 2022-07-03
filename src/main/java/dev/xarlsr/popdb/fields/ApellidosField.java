@@ -9,10 +9,30 @@ import dev.xarlsr.popdb.userint.GetData;
  */
 public class ApellidosField implements Field{
 
+    /**
+     * Sets the FTYPE constant (for field type).
+     */
     private static final String FTYPE = "APELLIDOS";
+
+    /**
+     * Sets the constant for a text file is needed or not.
+     */
     private static final Boolean FILE_NEEDED = true;
+
+    /**
+     * RVC states read values count; sets the number of lines to be read from the
+     * source text file, if needed.
+     */
     private static final int RVC = 100;
+
+    /**
+     * Name of the field
+     */
     String fName;
+
+    /**
+     * Full path and name of the text file to read, if needed.
+     */
     String pathName;
 
     /**
@@ -34,6 +54,10 @@ public class ApellidosField implements Field{
         this.pathName = pathName;
     }
 
+    /**
+     * Gets from the user the parameters needed to generate the field, via the
+     * methods of GetData class.
+     */
     @Override
     public void setGenerateParameters() {
         setName(GetData.readFieldName());

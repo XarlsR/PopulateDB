@@ -13,14 +13,14 @@ public class ValuesGenerator {
     public ValuesGenerator(){    }
 
  /**
-  * Returns a string randomly extracted from the selected text file.
+  * Returns a string randomly extracted from a selected text file.
   * It reads the number of text lines set by the value of readValueCount param from the file,
   * loads them into an array and extracts a random string from the array.
   * The length of array is set to readValueCount value, so the text file must contain
   * this number of lines or more.
-  * @param fileName: Ruta y nombre del fichero que contiene los nombres.
+  * @param fileName: Path and name of the source text file.
   * @param readValueCount: Number of lines to be read from the text file.
-  * @return Devuelve un <tt>String</tt> con el nombre seleccionado.
+  * @return String with a random text line from the file.
   */
     public static String getStringFromFile(String fileName, int readValueCount){
         String[] arrStr = new String[readValueCount];

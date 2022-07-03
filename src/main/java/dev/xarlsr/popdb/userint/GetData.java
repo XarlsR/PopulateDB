@@ -2,17 +2,33 @@ package dev.xarlsr.popdb.userint;
 
 import dev.xarlsr.utilidades.DateUtils;
 import dev.xarlsr.utilidades.EntradaTeclado;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
+import static dev.xarlsr.popdb.Parameters.MAX_ROWS;
 
+/**
+ * Class with the different interface methods to get the needed user inputs.
+ */
 public class GetData {
 
+    /**
+     * List with the type of data fields that can be managed by the app
+     */
     public static List<String> typesList;
+
+    /**
+     * Name of the table
+     */
     public static String tableName;
+
+    /**
+     * NUmber of fields that the SQL rows will have
+     */
     public static int fieldsCount;
 
+    /**
+     * Constructor intializing the typeList list via initTypesList() method.
+     */
     public GetData(){
         typesList=initTypesList();
     }
@@ -24,7 +40,7 @@ public class GetData {
      */
     private static List<String> initTypesList(){
         typesList = new ArrayList<>();
-        typesList.add("|STRING   |: Value is generated from a string read from a text file.");
+        typesList.add("|FSTRING  |: Value is generated from a string read from a text file.");
         typesList.add("|APELLIDOS|: Value is generated like in STRING but reading 2 random values from the text file.");
         typesList.add("|DNI      |: Value is auto generated corresponding to an spanish DNI -8 numbers + 1 control character.");
         return typesList;
@@ -132,6 +148,25 @@ public class GetData {
         return date;
     }
 
-
-
+    /**
+     * Asks the user to enter the number of SQL table filling rows to be generated.
+     * Checks if the qty. entered by user is under the maximum. If it fits the parameter
+     * MAX_ROWS then proceed. If not, the user is required to enter other qty.
+     * @return int Number of data rows to generate.
+     */
+    public static int readRowsCount() {
+        boolean ok = false;
+        do {
+            System.out.print("Cuantas entradas? (Max "+MAX_ROWS+"): ");
+            int rc = EntradaTeclado.leeEntero();
+            if (rc > MAX_ROWS){
+                System.out.println("El numero de entradas supera el máximo. Indique otra cantidad.");
+            }
+            else {
+                ok = true;
+                return rc;
+            }
+        } while (!ok);
+        return 0;
+    }
 }

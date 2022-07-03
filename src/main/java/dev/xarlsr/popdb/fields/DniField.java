@@ -8,10 +8,20 @@ import dev.xarlsr.popdb.userint.GetData;
  */
 public class DniField implements Field{
 
+    /**
+     * Sets the constant with field type
+     */
     private static final String FTYPE = "DNI";
+
+    /**
+     * Sets no text file is needed for this field type.
+     */
     private static final Boolean FILE_NEEDED = false;
+
+    /**
+     * Name of the field
+     */
     String fName;
-    String pathName;
 
     /**
      * Sets the name of the field.
@@ -23,15 +33,15 @@ public class DniField implements Field{
     }
 
     /**
-     * Sets the name and path of the text file to extract the data from, to fill the field.
-     * Only useful for fields generated from a text file.
-     * @param pathName Sets the name and path of the source text file.
+     * Useless for this field type
+     * @param pathName Useless.
      */
     @Override
-    public void setPathName(String pathName) {
-        this.pathName = pathName;
-    }
+    public void setPathName(String pathName) { }
 
+    /**
+     * Sets the only parameter needed to generate the field.
+     */
     @Override
     public void setGenerateParameters() {
         setName(GetData.readFieldName());
@@ -56,12 +66,12 @@ public class DniField implements Field{
     }
 
     /**
-     * Returns the full path oft the source file
-     * @return Path of the text file. Null if not a FILE type field.
+     * Useless for this field type.
+     * @return Null if not a FILE type field.
      */
     @Override
     public String getPathName() {
-        return pathName;
+        return null;
     }
 
     /**
