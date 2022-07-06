@@ -1,5 +1,6 @@
 package dev.xarlsr.popdb.fields;
 
+import dev.xarlsr.popdb.generators.ValuesGenerator;
 import dev.xarlsr.popdb.userint.GetData;
 import dev.xarlsr.utilidades.DateUtils;
 
@@ -106,27 +107,27 @@ public class DateField implements Field{
     }
 
     /**
-     * Generates and returns the value of the field. The value generation will be different
-     * for each type of field.
+     * Returns a random generated data between firstDate and lastDate values.
+     * <p>At first the firstDate and lastDate Strings are parsed to LocalDate type,
+     * then passed to the {@code genRandomDate()} method to get the random
+     * generated date and finally the result is parsed to String.</p>
      *
-     * @return Value of the field
+     * @return String with a random date.
      */
     @Override
     public String getValue() {
-
         LocalDate ldF = DateUtils.stringToDate(firstDate, "yyyyMMdd", "yyyyMMdd");
         LocalDate ldL = DateUtils.stringToDate(lastDate, "yyyyMMdd", "yyyyMMdd");
-
-        return null;
+        LocalDate ldG = ValuesGenerator.genRandomDate(ldF,ldL);
+        return DateUtils.dateToString(ldG);
     }
 
     /**
      * Returns whether or not the field needs a text file to be generated.
-     *
      * @return True or false
      */
     @Override
     public Boolean needsFile() {
-        return null;
+        return FILE_NEEDED;
     }
 }

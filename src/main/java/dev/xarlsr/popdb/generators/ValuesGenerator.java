@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Class containing the different methods to generate values for different types of fields.
@@ -12,16 +14,16 @@ public class ValuesGenerator {
 
     public ValuesGenerator(){    }
 
- /**
-  * Returns a string randomly extracted from a selected text file.
-  * It reads the number of text lines set by the value of readValueCount param from the file,
-  * loads them into an array and extracts a random string from the array.
-  * The length of array is set to readValueCount value, so the text file must contain
-  * this number of lines or more.
-  * @param fileName: Path and name of the source text file.
-  * @param readValueCount: Number of lines to be read from the text file.
-  * @return String with a random text line from the file.
-  */
+    /**
+     * Returns a string randomly extracted from a selected text file.
+     * It reads the number of text lines set by the value of readValueCount param from the file,
+     * loads them into an array and extracts a random string from the array.
+     * The length of array is set to readValueCount value, so the text file must contain
+     * this number of lines or more.
+     * @param fileName: Path and name of the source text file.
+     * @param readValueCount: Number of lines to be read from the text file.
+     * @return String with a random text line from the file.
+     */
     public static String getStringFromFile(String fileName, int readValueCount){
         String[] arrStr = new String[readValueCount];
         try {
@@ -62,10 +64,10 @@ public class ValuesGenerator {
 
 
     /**
-     * Generates an spanish DNI number, including its control character.
-     * It returns s 9 characters String, the first 8 are numbers and the
+     * Generates an spanish DNI number, including its calculated control character.
+     * It returns a 9 characters string, the first 8 are numbers and the
      * last one is the alphabetical control number.
-     * @return
+     * @return String with a DNI number.
      */
     public static String genDni(){
 
@@ -189,9 +191,58 @@ public class ValuesGenerator {
         return dni;
     }
 
-
-    public static LocalDate genRandomDate(){
-
-        return null;
+    /**
+     * Generates a random String with a user defined pattern, which is passed as parameter.
+     * <p>The random values are generated with the following rules:</p>
+     * <li>'a' character is replaced with a random uppercase alphabetical character in that position.</li>
+     * <li>'n' character is replaced with a random number 0-9 in that position.</li>
+     * <li>Any other character is passed to the resulting string as part of the pattern.</li>
+     * @param sPattern The pattern to generate the string.
+     * @return String Randomly generated string.
+     */
+    public static String genPatternString(String sPattern){
+        String result = "";
+        // Pattern is converted to char array
+        char[] chars = sPattern.toCharArray();
+        for (int i = 0; i<chars.length; i++){
+            // Generates alphabetical characters
+            if (chars[i] == 'a'){
+                Random r = new Random();
+                // Lower and upper limits for ASCII characters A-Z (+1) in decimal notation
+                int low = 65;
+                int hi = 91;
+                int rand = r.nextInt(hi-low)+low;
+                result = result + (char)rand;
+            }
+            // Generates numerical characters
+            else if (chars[i] == 'n'){
+                Random r = new Random();
+                // Lower and upper limits for ASCII characters 0-9 (+1) in decimal notation.
+                int low = 48;
+                int hi = 58;
+                int rand = r.nextInt(hi-low)+low;
+                result = result + (char)rand;
+            }
+            // Passes other characters unmanaged as part of the pattern.
+            else {
+                result = result + chars[i];
+            }
+        }
+        System.out.println(result);
+        return result;
     }
+
+
+    public static LocalDate genRandomDate(LocalDate startInclusive, LocalDate endExclusive) {
+        long startEpochDay = startInclusive.toEpochDay();
+        long endEpochDay = endExclusive.toEpochDay();
+        long randomDay = ThreadLocalRandom
+                .current()
+                .nextLong(startEpochDay, endEpochDay);
+        System.out.println(startEpochDay);
+        System.out.println(endEpochDay);
+        System.out.println(randomDay);
+        return LocalDate.ofEpochDay(randomDay);
+    }
+
 }

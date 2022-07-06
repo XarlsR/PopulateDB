@@ -7,12 +7,12 @@ import dev.xarlsr.popdb.userint.GetData;
  * This class of field is intended for using with spanish and other latin countries
  * with double surname or family name.
  */
-public class ApellidosField implements Field{
+public class DoubleStringField implements Field{
 
     /**
      * Sets the FTYPE constant (for field type).
      */
-    private static final String FTYPE = "APELLIDOS";
+    private static final String FTYPE = "DSTRING";
 
     /**
      * Sets the constant for a text file is needed or not.

@@ -15,9 +15,11 @@ public class FieldFactory {
             return null;
         }
         switch (fieldType){
-            case "APELLIDOS" -> {return new ApellidosField();}
-            case "FSTRING" -> {return new FileStringField();}
+            case "DATE" -> {return new DateField();}
             case "DNI" -> {return new DniField();}
+            case "DSTRING" -> {return new DoubleStringField();}
+            case "FSTRING" -> {return new FileStringField();}
+            case "GSTRING" -> {return new GenStringField();}
             default -> {return null;}
         }
     }

@@ -2,9 +2,9 @@ package dev.xarlsr.popdb;
 
 import dev.xarlsr.popdb.fields.Field;
 import dev.xarlsr.popdb.generators.FileCreator;
+import dev.xarlsr.popdb.generators.ValuesGenerator;
 import dev.xarlsr.popdb.rows.RowTemplate;
 import dev.xarlsr.popdb.userint.GetData;
-import dev.xarlsr.utilidades.EntradaTeclado;
 
 import java.util.List;
 
@@ -42,12 +42,14 @@ public class Popdb {
      * class to create and fill the text file containing the SQL code to populate the table.
      */
     public static void main( String[] args ) {
+
+        //ValuesGenerator.genPatternString("ESnn nnnn nnnn nnnn nnnn nnnn");
         tableName=GetData.readTableName();
         fieldsCount=GetData.readFieldsCount();
         rowsCount = GetData.readRowsCount();
         RowTemplate rowTemplate = new RowTemplate();
         fields = rowTemplate.fieldListComposer(fieldsCount);
-        FileCreator.createFile(FileCreator.getFileName());
+        FileCreator.createFile(GetData.readFileName());
         FileCreator.writeFile(rowTemplate, rowsCount);
     }
 }

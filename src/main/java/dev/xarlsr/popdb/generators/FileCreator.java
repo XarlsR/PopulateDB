@@ -2,7 +2,7 @@ package dev.xarlsr.popdb.generators;
 
 import dev.xarlsr.popdb.rows.Row;
 import dev.xarlsr.popdb.rows.RowTemplate;
-import dev.xarlsr.utilidades.EntradaTeclado;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,23 +15,9 @@ import java.io.IOException;
 public class FileCreator {
 
     /**
-     * Name of the file to be created and written.
-     */
-    static String fileName;
-
-    /**
      * The file object to handle.
      */
     static File file;
-
-    /**
-     * Asks the user for the name of the file and returns it as String.
-     * @return String with the name of the file.
-     */
-    public static String getFileName(){
-        System.out.print("Introduzca nombre del fichero SQL:");
-        return fileName = EntradaTeclado.leeCadena();
-    }
 
     /**
      * Creates the file if it doesn't exists and returns an File object.
