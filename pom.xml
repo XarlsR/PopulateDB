@@ -3,7 +3,7 @@
 
 	<groupId>dev.xarlsr.popdb</groupId>
 	<artifactId>populatedb</artifactId>
-	<version>1.1.0</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>populatedb</name>
@@ -26,10 +26,11 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://github.com/XarlsR/xarlsr-utilidades.git -->
+
+		<!-- https://github.com/XarlsR/xarlsr-utilities.git -->
 		<dependency>
-			<groupId>dev.xarlsr.utilidades</groupId>
-			<artifactId>xarlsr-utilidades</artifactId>
+			<groupId>dev.xarlsr.utilities</groupId>
+			<artifactId>xarlsr-utilities</artifactId>
 			<version>2.3.0</version>
 		</dependency>
 
@@ -74,7 +75,7 @@
 						<configuration>
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>dev.xarlsr.popdb.YourMainApp.java</mainClass>
+									<mainClass>dev.xarlsr.popdb.Popdb.java</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
@@ -91,7 +92,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>dev.xarlsr.popdb.YourMainApp.java</mainClass>
+							<mainClass>dev.xarlsr.popdb.Popdb.java</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

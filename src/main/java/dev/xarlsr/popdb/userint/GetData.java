@@ -1,11 +1,9 @@
 package dev.xarlsr.popdb.userint;
 
-import dev.xarlsr.utilidades.DateUtils;
-import dev.xarlsr.utilidades.EntradaTeclado;
-import java.util.ArrayList;
+import dev.xarlsr.utilities.ConsoleInput;
 import java.util.List;
-
 import static dev.xarlsr.popdb.Parameters.*;
+
 
 /**
  * Class with the different interface methods to get the needed user inputs.
@@ -43,7 +41,8 @@ public class GetData {
      */
     public static void printTypesList(){
         for (int i = 0; i<FIELD_TYPES.size();i++) {
-            System.out.println(FIELD_TYPES.get(i)+":  "+FIELD_DESC.get(i));
+            //System.out.println(FIELD_TYPES.get(i)+":  "+FIELD_DESC.get(i));
+            System.out.printf("%-9s %s %s %n", FIELD_TYPES.get(i), ": ",FIELD_DESC.get(i));
         }
     }
 
@@ -52,9 +51,9 @@ public class GetData {
      * @return String with the name of the table.
      */
     public static String readTableName(){
-        EntradaTeclado.borrarPantalla();
-        System.out.print("Nombre de la tabla: ");
-        return tableName = EntradaTeclado.leeCadena();
+        ConsoleInput.clearConsole();
+        System.out.print("Table name: ");
+        return tableName = ConsoleInput.readString();
     }
 
     /**
@@ -70,9 +69,8 @@ public class GetData {
      * @return Number of fields stored in fieldsCount integer variable.
      */
     public static int readFieldsCount(){
-        //EntradaTeclado.borrarPantalla();
-        System.out.print("Número de campos a rellenar: ");
-        return fieldsCount=EntradaTeclado.leeEntero();
+        System.out.print("Number of fields to fill: ");
+        return fieldsCount=ConsoleInput.readInteger();
     }
 
     /**
@@ -88,8 +86,8 @@ public class GetData {
      * @return String with the name of the field.
      */
     public static String readFieldName(){
-        System.out.print("Nombre del campo: ");
-        return EntradaTeclado.leeCadena();
+        System.out.print("Name of the field: ");
+        return ConsoleInput.readString();
     }
 
     /**
@@ -98,12 +96,12 @@ public class GetData {
      * @return String with the type entered by user.
      */
     public static String readFieldType(){
-        System.out.println("TIPOS DE CAMPOS DISPONIBLES:");
+        System.out.println("AVAILABLE FIELD TYPES:");
         System.out.println("----------------------------");
         printTypesList();
         System.out.println("----------------------------");
-        System.out.print("INTRODUZCA EL TIPO DE CAMPO (puede introducirse en MAY/min indistintamente): ");
-        return EntradaTeclado.leeCadena().toUpperCase();
+        System.out.print("ENTER THE FIELD TYPE (UPPER/lower case not sensitive): ");
+        return ConsoleInput.readString().toUpperCase();
     }
 
     /**
@@ -111,29 +109,27 @@ public class GetData {
      * @return String with the path entered by user.
      */
     public static String readPathName(){
-        System.out.print("Path del fichero del campo: ");
-        return EntradaTeclado.leeCadena();
+        System.out.print("Path and name of the source file: ");
+        return ConsoleInput.readString();
     }
 
     /**
      * Asks the user to enter a date and returns it to the calling method.
      * @return String with the entered date. The format is "yyyyMMdd".
      */
-    public static String readDate() {
-
+    public static String readDate(String startEnd) {
         boolean valid;
         String date;
-
         do {
-            System.out.println("Introduzca una fecha en formato AAAAmmDD;");
-            date = EntradaTeclado.leeCadena(8);
+            System.out.println("Enter a "+startEnd+" date with format 'AAAAmmDD'");
+            date = ConsoleInput.readString(8);
             // TODO: Resolver el fallo con el método isValidDate, que devuelve error.
             //valid = DateUtils.isValidDate(date);
             valid = true;
             if (valid) {
                 return date;
             } else {
-                System.out.println("La fecha introducida no es válida");
+                System.out.println("The entered date is not valid");
             }
         }
         while (!valid);
@@ -149,10 +145,10 @@ public class GetData {
     public static int readRowsCount() {
         boolean ok = false;
         do {
-            System.out.print("Cuantas entradas? (Max "+MAX_ROWS+"): ");
-            int rc = EntradaTeclado.leeEntero();
+            System.out.print("How many rows to generate? (Max "+MAX_ROWS+"): ");
+            int rc = ConsoleInput.readInteger();
             if (rc > MAX_ROWS){
-                System.out.println("El numero de entradas supera el máximo. Indique otra cantidad.");
+                System.out.println("The entered quantity is over max. Please, enter other value under "+MAX_ROWS+": ");
             }
             else {
                 ok = true;
@@ -167,8 +163,8 @@ public class GetData {
      * @return String with the name of the file.
      */
     public static String readFileName(){
-        System.out.print("Introduzca nombre del fichero SQL:");
-        return fileName = EntradaTeclado.leeCadena();
+        System.out.print("Name of the SQL output file: ");
+        return fileName = ConsoleInput.readString();
     }
 
     /**
@@ -176,10 +172,10 @@ public class GetData {
      * @return
      */
     public static String readSPattern() {
-        System.out.println("Introduzca el patrón de la cadena a generar.");
-        System.out.println("'a' para caracteres, 'n' para números.");
-        System.out.println("Cualquier otro carácter quedará como parte del patrón.");
-        System.out.print("Patrón a generar: ");
-        return EntradaTeclado.leeCadena();
+        System.out.println("Enter the patter of the string to generate.");
+        System.out.println("'a' alphabetical characters, 'n' para digits.");
+        System.out.println("Any other character will be passed as part of the pattern.");
+        System.out.print("Pattern to generate: ");
+        return ConsoleInput.readString();
     }
 }

@@ -2,7 +2,7 @@ package dev.xarlsr.popdb.fields;
 
 import dev.xarlsr.popdb.generators.ValuesGenerator;
 import dev.xarlsr.popdb.userint.GetData;
-import dev.xarlsr.utilidades.DateUtils;
+import dev.xarlsr.utilities.DateUtils;
 
 import java.time.LocalDate;
 
@@ -59,8 +59,8 @@ public class DateField implements Field{
     @Override
     public void setGenerateParameters() {
         setName(GetData.readFieldName());
-        setFirstDate(GetData.readDate());
-        setLastDate(GetData.readDate());
+        setFirstDate(GetData.readDate("starting"));
+        setLastDate(GetData.readDate("ending"));
     }
 
     /**

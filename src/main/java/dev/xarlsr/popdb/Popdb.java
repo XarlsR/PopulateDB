@@ -43,7 +43,6 @@ public class Popdb {
      */
     public static void main( String[] args ) {
 
-        //ValuesGenerator.genPatternString("ESnn nnnn nnnn nnnn nnnn nnnn");
         tableName=GetData.readTableName();
         fieldsCount=GetData.readFieldsCount();
         rowsCount = GetData.readRowsCount();

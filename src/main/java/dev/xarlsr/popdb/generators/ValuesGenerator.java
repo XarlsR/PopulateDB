@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,30 +17,52 @@ public class ValuesGenerator {
     public ValuesGenerator(){    }
 
     /**
-     * Returns a string randomly extracted from a selected text file.
-     * It reads the number of text lines set by the value of readValueCount param from the file,
-     * loads them into an array and extracts a random string from the array.
-     * The length of array is set to readValueCount value, so the text file must contain
-     * this number of lines or more.
+     * Reads a text file and returns every text lines in a List of Strings.
+     * It reads every text lines from the file and,
+     * loads them into a List<String> Then returns the List.
      * @param fileName: Path and name of the source text file.
-     * @param readValueCount: Number of lines to be read from the text file.
-     * @return String with a random text line from the file.
+     * @return List<String> with every text lines of the source file.
+     * @since Version 1.0.3
      */
-    public static String getStringFromFile(String fileName, int readValueCount){
-        String[] arrStr = new String[readValueCount];
+    public static List<String> getListStringFromFile(String fileName) {
+        List<String> stringList = new ArrayList<>();
+        BufferedReader br = null;
+        int linesCount = 0;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            int i = 0;
+            br = new BufferedReader(new FileReader(fileName));
             do {
-               arrStr[i] = br.readLine();
-               i++;
+                stringList.add(br.readLine());
+                //System.out.println("Linea "+linesCount+" "+stringList.get(linesCount));
+                linesCount++;
             }
-            while ((arrStr[i-1] != null) & (i<readValueCount));
+            while ((stringList.get(linesCount-1) != null));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int i = (int)(Math.random()*readValueCount);
-        return arrStr[i];
+        finally{
+            try{
+                br.close();
+            }
+            catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+        int returnLine = (int)(Math.random()*linesCount);
+        return stringList;
+    }
+
+    /**
+     * Returns a string randomly extracted from a selected text file.
+     * It calls the getListStringFromFile() method to read the file,
+     * gets the list of lines (strings) and selects one of them randomly.
+     * @param fileName: Path and name of the source text file.
+     * @return String with a random text line from the file.
+     * @since Version 1.0.3
+     */
+    public static String getRandStringFromFile(String fileName) {
+        List<String> stringList = getListStringFromFile(fileName);
+        int returnLine = (int)(Math.random()* stringList.size());
+        return stringList.get(returnLine);
     }
 
     /**
@@ -88,7 +112,18 @@ public class ValuesGenerator {
         }
         // Casts the string builder to String
         dni = sb.toString();
+        char letra = getDniLetter(dni);
+        dni = dni+letra;
+        return dni;
+    }
 
+    /**
+     * Generates a spanish DNI (national identification document) control character.
+     * @param dni Set of digits which the control character is based in.
+     * @return char with the control letter.
+     * @since version 1.0.3
+     */
+    public static char getDniLetter(String dni) {
         // Generates the control character.
         int num = Integer.parseInt(dni);
         int resto = num%23;
@@ -187,12 +222,12 @@ public class ValuesGenerator {
                 break;
             }
         }
-        dni = dni+letra;
-        return dni;
+        return letra;
     }
 
     /**
-     * Generates a random String with a user defined pattern, which is passed as parameter.
+     * Generates a random String with a user defined pattern, which
+     * is passed as parameter.
      * <p>The random values are generated with the following rules:</p>
      * <li>'a' character is replaced with a random uppercase alphabetical character in that position.</li>
      * <li>'n' character is replaced with a random number 0-9 in that position.</li>
@@ -239,9 +274,6 @@ public class ValuesGenerator {
         long randomDay = ThreadLocalRandom
                 .current()
                 .nextLong(startEpochDay, endEpochDay);
-        System.out.println(startEpochDay);
-        System.out.println(endEpochDay);
-        System.out.println(randomDay);
         return LocalDate.ofEpochDay(randomDay);
     }
 

@@ -97,7 +97,7 @@ public class FileStringField implements Field{
      */
     @Override
     public String getValue() {
-        return ValuesGenerator.getStringFromFile(pathName,RVC);
+        return ValuesGenerator.getRandStringFromFile(pathName);
     }
 
     /**

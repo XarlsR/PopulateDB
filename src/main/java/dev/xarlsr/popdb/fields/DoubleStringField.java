@@ -101,8 +101,8 @@ public class DoubleStringField implements Field{
         String ape1;
         String ape2;
         String apellidos;
-        ape1 = ValuesGenerator.getStringFromFile(pathName, RVC);
-        ape2 = ValuesGenerator.getStringFromFile(pathName, RVC);
+        ape1 = ValuesGenerator.getRandStringFromFile(pathName);
+        ape2 = ValuesGenerator.getRandStringFromFile(pathName);
         apellidos = ape1+" "+ape2;
         return apellidos;
     }
