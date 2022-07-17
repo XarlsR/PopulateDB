@@ -123,7 +123,6 @@ public class GetData {
         do {
             System.out.println("Enter a "+startEnd+" date with format 'AAAAmmDD'");
             date = ConsoleInput.readString(8);
-            // TODO: Resolver el fallo con el método isValidDate, que devuelve error.
             //valid = DateUtils.isValidDate(date);
             valid = true;
             if (valid) {

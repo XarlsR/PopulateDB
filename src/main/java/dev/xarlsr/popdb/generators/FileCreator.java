@@ -20,9 +20,9 @@ public class FileCreator {
     static File file;
 
     /**
-     * Creates the file if it doesn't exists and returns an File object.
-     * @param fileName Name of the file to create.
-     * @return Return a File object.
+     * <b>Creates a file if it doesn't exists and returns a <code>File</code> object.</b><br>
+     * @param fileName <code>String</code> with the path and name of the file to create.
+     * @return Return a <code>File</code> object.
      */
     public static File createFile(String fileName) {
         file = new File(fileName);
@@ -41,11 +41,13 @@ public class FileCreator {
     }
 
     /**
-     * Writes the code of the SQL lines of the text file, based on the RowTemplate.
-     * Creates each new row and fills them by calling the method composeSql(), then
+     * <b>Writes the code of the SQL lines of the text file, based on a RowTemplate.</b><br>
+     * Creates each new row and fills them by calling the method
+     * {@link Row#composeSql()}, then
      * it write the result to the file.
-     * @param rowTemplate Cast containing the fields definition to be filled.
+     * @param rowTemplate <code>RowTemplate</code> object containing the fields definition to be filled.
      * @param linesCount Number of lines (rows) to populate the table.
+     * @see RowTemplate
      */
     public static void writeFile(RowTemplate rowTemplate, int linesCount){
         try {

@@ -6,9 +6,9 @@ package dev.xarlsr.popdb.fields;
 public class FieldFactory {
 
     /**
-     * Returns an Field object of the selected type
-     * @param fieldType Type of object to return.
-     * @return Field object of the selected type.
+     * <b>Returns an Field object of the selected type</b>
+     * @param fieldType <code>String</code> with the type of object to return.
+     * @return <code>Field</code> object of the selected type.
      */
     public Field getField(String fieldType){
         if(fieldType==null){
@@ -20,6 +20,8 @@ public class FieldFactory {
             case "DSTRING" -> {return new DoubleStringField();}
             case "FSTRING" -> {return new FileStringField();}
             case "GSTRING" -> {return new GenStringField();}
+            case "PSTRING" -> {return new ProbStringField();}
+            // TODO: Implementar el field probabilistico
             default -> {return null;}
         }
     }

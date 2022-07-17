@@ -43,12 +43,13 @@ public class Popdb {
      */
     public static void main( String[] args ) {
 
-        tableName=GetData.readTableName();
+        System.out.println(ValuesGenerator.getProbStringFromFile("C:\\Java\\Proyectos\\populatedb\\Apellidos_Prob_ES_1000.txt"));
+        /*tableName=GetData.readTableName();
         fieldsCount=GetData.readFieldsCount();
         rowsCount = GetData.readRowsCount();
         RowTemplate rowTemplate = new RowTemplate();
         fields = rowTemplate.fieldListComposer(fieldsCount);
         FileCreator.createFile(GetData.readFileName());
-        FileCreator.writeFile(rowTemplate, rowsCount);
+        FileCreator.writeFile(rowTemplate, rowsCount);*/
     }
 }

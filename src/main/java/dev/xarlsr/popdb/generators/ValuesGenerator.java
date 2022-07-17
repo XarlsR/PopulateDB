@@ -17,11 +17,11 @@ public class ValuesGenerator {
     public ValuesGenerator(){    }
 
     /**
-     * Reads a text file and returns every text lines in a List of Strings.
-     * It reads every text lines from the file and,
-     * loads them into a List<String> Then returns the List.
-     * @param fileName: Path and name of the source text file.
-     * @return List<String> with every text lines of the source file.
+     * <b>Reads a text file and returns every text lines in a <code>List</code> of <code>Strings</code>.</b><br>
+     * It reads every text lines from the file and
+     * loads them into a <code>List<String></String></code> Then returns the List.
+     * @param fileName: <code>String</code> with path and name of the source text file.
+     * @return <code>List<String></String></code> with every text lines of the source file.
      * @since Version 1.0.3
      */
     public static List<String> getListStringFromFile(String fileName) {
@@ -52,17 +52,62 @@ public class ValuesGenerator {
     }
 
     /**
-     * Returns a string randomly extracted from a selected text file.
-     * It calls the getListStringFromFile() method to read the file,
+     * <b>Returns a string randomly extracted from a selected text file.</b><br>
+     * It calls the {@link #getListStringFromFile(String) getListStringFromFile(String)} method to read the file,
      * gets the list of lines (strings) and selects one of them randomly.
-     * @param fileName: Path and name of the source text file.
-     * @return String with a random text line from the file.
+     * @param fileName: <code>String</code> with path and name of the source text file.
+     * @return <code>String</code> with a random text line from the file.
      * @since Version 1.0.3
      */
     public static String getRandStringFromFile(String fileName) {
         List<String> stringList = getListStringFromFile(fileName);
-        int returnLine = (int)(Math.random()* stringList.size());
+        int returnLine = (int)(Math.random()* (stringList.size()-1));
         return stringList.get(returnLine);
+    }
+
+   /**
+     * <b>Returns a value from a text file selected by its probability of occurrence.</b><br>
+     * The lines of the text file must be in format 'Value,Probability' (i.e "Value1,0.02').
+     * Every text lines of the file are read via {@link #getListStringFromFile(String)} method and
+     * loaded to a <code>List</code>. Then the list is split into two sublists, one with the values
+     * and the other containing the probabilities of each value (after parsing the
+     * <code>String</code> to <code>Double</code>). It also generates a third auxiliar <code>List</code> with the
+     * accumulative probabilities read.
+     * @param fileName <code>String</code> with path and name of the source file
+     * @return selected <code>String</code>.
+     * @since Version 2.3.0
+     */
+    public static String getProbStringFromFile(String fileName){
+        // List with the read lines from the text file
+        List<String> grossList = getListStringFromFile(fileName);
+        // List with the values of every line
+        List<String> valuesList = new ArrayList<>();
+        // List with the probability of every line
+        List<Double> probList = new ArrayList<>();
+        // Accumulative list with the sum of n-probabilities
+        List<Double> accuProbList = new ArrayList<>();
+        for (int i = 0; i< grossList.size()-1;i++){
+            String[] parts = grossList.get(i).split(",");
+            valuesList.add(i, parts[0]);
+            probList.add(i, Double.parseDouble(parts[1]));
+            // The first entry of the accu list is the probability of the first line.
+            if (i<=0){
+                accuProbList.add(i, probList.get(i));
+            }
+            // The rest of the entries are the actual probability plus the previous sum of probabilities.
+            else{
+                accuProbList.add(i, probList.get(i)+accuProbList.get(i-1));
+            }
+        }
+        double randSel = Math.random();
+        // Runs the accu list checking if the actual value is higher than the random number. When it's higher returns the corresponding value of the values list.
+        for (int j = 0; j<accuProbList.size();j++){
+            //System.out.println("Accu "+j+" "+accuProbList.get(j));
+            if (accuProbList.get(j)>=randSel){
+                return valuesList.get(j);
+            }
+        }
+        return null;
     }
 
     /**
@@ -88,10 +133,10 @@ public class ValuesGenerator {
 
 
     /**
-     * Generates an spanish DNI number, including its calculated control character.
+     * <b>Generates an spanish DNI number, including its calculated control character.</b><br>
      * It returns a 9 characters string, the first 8 are numbers and the
      * last one is the alphabetical control number.
-     * @return String with a DNI number.
+     * @return <code>String</code> with a DNI number.
      */
     public static String genDni(){
 
@@ -118,9 +163,9 @@ public class ValuesGenerator {
     }
 
     /**
-     * Generates a spanish DNI (national identification document) control character.
-     * @param dni Set of digits which the control character is based in.
-     * @return char with the control letter.
+     * <b>Generates a spanish DNI (national identification document) control character.</b><br>
+     * @param dni <code>String</code>. Set of digits which the control character is based in.
+     * @return <code>char</code> with the control letter.
      * @since version 1.0.3
      */
     public static char getDniLetter(String dni) {
@@ -226,14 +271,16 @@ public class ValuesGenerator {
     }
 
     /**
-     * Generates a random String with a user defined pattern, which
-     * is passed as parameter.
+     * <b>Generates a random <code>String</code> with a user defined pattern, which
+     * is passed as parameter.</b><br>
      * <p>The random values are generated with the following rules:</p>
-     * <li>'a' character is replaced with a random uppercase alphabetical character in that position.</li>
-     * <li>'n' character is replaced with a random number 0-9 in that position.</li>
-     * <li>Any other character is passed to the resulting string as part of the pattern.</li>
-     * @param sPattern The pattern to generate the string.
-     * @return String Randomly generated string.
+     * <ul>
+     * <li>'a' character is replaced with a random uppercase alphabetical character in that position.
+     * <li>'n' character is replaced with a random number 0-9 in that position.
+     * <li>Any other character is passed to the resulting string as part of the pattern.
+     * </ul>
+     * @param sPattern <code>String</code> with the pattern to generate the string.
+     * @return Randomly generated <code>String</code>.
      */
     public static String genPatternString(String sPattern){
         String result = "";
@@ -267,7 +314,15 @@ public class ValuesGenerator {
         return result;
     }
 
-
+    /**
+     * <b>Generate a random date between two given dates passed as parameters.</b><br>
+     * The starting date is inclusive and the ending date is exclusive. The generated
+     * date is returned in {@link LocalDate LocalDate} form.
+     * @param startInclusive <code>LocalDate</code> with the starting date (inclusive).
+     * @param endExclusive <code>LocalDate</code> with the ending date (exclusive).
+     * @return <code>LocalDate</code> with a random date within the given interval.
+     * @see ThreadLocalRandom
+     */
     public static LocalDate genRandomDate(LocalDate startInclusive, LocalDate endExclusive) {
         long startEpochDay = startInclusive.toEpochDay();
         long endEpochDay = endExclusive.toEpochDay();

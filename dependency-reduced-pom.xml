@@ -4,7 +4,7 @@
   <groupId>dev.xarlsr.popdb</groupId>
   <artifactId>populatedb</artifactId>
   <name>populatedb</name>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <build>
     <plugins>
       <plugin>
@@ -31,7 +31,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>dev.xarlsr.popdb.YourMainApp.java</mainClass>
+                  <mainClass>dev.xarlsr.popdb.Popdb.java</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -45,7 +45,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>dev.xarlsr.popdb.YourMainApp.java</mainClass>
+              <mainClass>dev.xarlsr.popdb.Popdb.java</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -117,6 +117,30 @@
         <exclusion>
           <artifactId>junit-jupiter-engine</artifactId>
           <groupId>org.junit.jupiter</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.7</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>commons-beanutils</artifactId>
+          <groupId>commons-beanutils</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-digester</artifactId>
+          <groupId>commons-digester</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-logging</artifactId>
+          <groupId>commons-logging</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-collections</artifactId>
+          <groupId>commons-collections</groupId>
         </exclusion>
       </exclusions>
     </dependency>

@@ -27,7 +27,7 @@ public class Row {
     public List<Field> fields;
 
     /**
-     * The constructor initializes the list of fields from the rowTemplate parameter.
+     * <b>The constructor initializes the list of fields from the rowTemplate parameter.</b>
      * @param rowTemplate RowTemplate object with the list of fields to handle and fill.
      */
     public Row(RowTemplate rowTemplate){
@@ -35,10 +35,12 @@ public class Row {
     }
 
     /**
-     * Generates the SQL code of the row which will be passed to the .SQL file.
+     * <b>Generates the SQL code of the row which will be passed to the .SQL file.</b><br>
      * The actual value of each field is filled by calling the method getValue() of
      * each Field object.
-     * @return Line of text with the SQL code to fill a row.
+     * @return <code>String</code> with a line of text with the SQL code to fill a row.
+     * @see Field#getValue()
+     * @see Row
      */
     public String composeSql(){
         String nString = " (";
